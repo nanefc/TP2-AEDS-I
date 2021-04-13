@@ -225,7 +225,7 @@ void cadastro_livro(LIVRO *lista_livro) {
 	gets(livro.autor);
 	printf ("Digite o numero da edicao: ");
 	setbuf(stdin, NULL);
-	scanf ("%d", &livro_edicao)
+	scanf ("%d", &livro_edicao);
 }
 
 void exlusao_livro(LIVRO *lista_livro) {
