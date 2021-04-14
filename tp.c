@@ -3,6 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct DATA
+{
+	int dia;
+	int mes;
+}DATA;
+
+
 typedef struct LIVRO
 {
     char nome[50];
@@ -23,8 +30,7 @@ typedef struct ALUGUEL
 {
     LIVRO livro;
 	ALUNO aluno;
-	int dia;
-	int mes;
+	DATA data;
 	struct ALUGUEL *prox_ALUGUEL;
 }ALUGUEL;
 
@@ -37,7 +43,7 @@ void inic_listas(ALUGUEL *lista_aluguel, ALUNO *lista_aluno, LIVRO *lista_livro)
     lista_livro -> prox_LIVRO;
 }
 
-int menu(void) {
+void menu(ALUGUEL *lista_aluguel, ALUNO *lista_aluno, LIVRO *lista_livro) {
 	int op_menu = 0;
 	while (op_menu != 4) { //Fica em looping no menu enquanto o usuário não digitar 4
 		printf ("* Bem-vindo(a) ao sistema da biblioteca *\n");
@@ -46,13 +52,13 @@ int menu(void) {
 		setbuf(stdin, NULL);
 		scanf ("%d", &op_menu);
 		if (op_menu == 1) {
-			menu_aluguel();
+			menu_aluguel(lista_aluguel);
 		}
 		if (op_menu == 2) {
-			menu_livro(livro);
+			menu_livro(lista_livro);
 		}
 		if (op_menu == 3) {
-			menu_aluno(aluno);
+			menu_aluno(lista_aluno);
 		}
 	}
 }
@@ -87,7 +93,7 @@ void menu_aluguel(ALUGUEL *lista_aluguel) {
 	}
 }
 
-void menu_aluno(ALUNO *aluno) {
+void menu_aluno(ALUNO *lista_aluno) {
 	int op_submenu = 0;
 	while (op_submenu != 6) { //Fica em looping no submenu de Aluno enquanto o usuário não digitar 6
 		printf ("(1) - Cadastro\n""(2) - Exclusao\n""(3) - Busca\n""(4) - Quantidade\n""(5) - Impressão\n""(6) - Voltar ao menu principal\n");
@@ -95,29 +101,29 @@ void menu_aluno(ALUNO *aluno) {
 		setbuf(stdin, NULL);
 		scanf ("%d", &op_submenu);
 		if (op_submenu == 1) {
-			cadastro_aluno(aluno);
+			cadastro_aluno(lista_aluno);
 			op_submenu = 0;
 		}
 		if (op_submenu == 2) {
-			exclusao_aluno(aluno);
+			exclusao_aluno(lista_aluno);
 			op_submenu = 0;
 		}
 		if (op_submenu == 3) {
-			busca_aluno(aluno);
+			busca_aluno(lista_aluno);
 			op_submenu = 0;
 		}
 		if (op_submenu == 4) {
-			quantidade_aluno(aluno);
+			quantidade_aluno(lista_aluno);
 			op_submenu = 0;
 		}
 		if (op_submenu == 5) {
-			impressao_aluno(aluno);
+			impressao_aluno(lista_aluno);
 			op_submenu = 0;
 		}
 	}
 }
 
-void menu_livro(LIVRO *livro) {
+void menu_livro(LIVRO *lista_livro) {
 	int op_submenu = 0;
 	while (op_submenu != 6) { //Fica em looping no submenu de Livro enquanto o usuário não digitar 6
 		printf ("(1) - Cadastro\n""(2) - Exclusao\n""(3) - Busca\n""(4) - Quantidade\n""(5) - Impressão\n""(6) - Voltar ao menu principal\n");
@@ -125,23 +131,23 @@ void menu_livro(LIVRO *livro) {
 		setbuf(stdin, NULL);
 		scanf ("%d", &op_submenu);
 		if (op_submenu == 1) {
-			cadastro_livro(livro);
+			cadastro_livro(lista_livro);
 			op_submenu = 0;
 		}
 		if (op_submenu == 2) {
-			exclusao_livro(livro);
+			exclusao_livro(lista_livro);
 			op_submenu = 0;
 		}
 		if (op_submenu == 3) {
-			busca_livro(livro);
+			busca_livro(lista_livro);
 			op_submenu = 0;
 		}
 		if (op_submenu == 4) {
-			quantidade_livro(livro);
+			quantidade_livro(lista_livro);
 			op_submenu = 0;
 		}
 		if (op_submenu == 5) {
-			impressao_livro(livro);
+			impressao_livro(lista_livro);
 			op_submenu = 0;
 		}
 	}
@@ -150,23 +156,47 @@ void menu_livro(LIVRO *livro) {
 
 /////Funções da entidade aluguel/////
 void cadastro_aluguel(ALUGUEL *lista_aluguel) {
+	while (lista_aluguel -> prox_ALUGUEL != NULL) {
+		lista_aluguel = lista_aluguel -> prox_ALUGUEL;
+	}
 	printf ("Digite o nome do livro: ");
 	setbuf(stdin, NULL);
-	fgets(lista_aluguel.livro.nome);
-	aluguel.livro.nome = (char*)malloc((aluguel.livro.nome) * sizeof(char));
-	printf(sizeof(aluguel.livro.nome));
+	fgets(lista_aluguel->livro.nome, 50, stdin);
 	printf ("Digite o nome do aluno: ");
 	setbuf(stdin, NULL);
-	gets(aluguel.aluno.nome);
-	aluguel.aluno.nome = (char*)malloc((aluguel.aluno.nome) * sizeof(char));
+	fgets(lista_aluguel->aluno.nome, 50, stdin);
 	printf ("Digite a data do aluguel (dd/mm): ");
 	setbuf(stdin, NULL);
-	scanf ("%d/%d", &aluguel.dia, &aluguel.mes);
+	scanf ("%d/%d", &lista_aluguel->data.dia, &lista_aluguel->data.mes);
 
 }
 
-void exlusao_aluguel(ALUGUEL *lista_aluguel) {
-
+void exclusao_aluguel(ALUGUEL *lista_aluguel) {
+	LIVRO busca_livro;
+	ALUNO busca_aluno;
+	DATA busca_data;
+	ALUGUEL *atual = lista_aluguel, *antecessor = NULL;
+	printf("Digite o nome do livro: \n");
+	fgets(busca_livro.nome, 50, stdin);
+	printf("Digite o nome do aluno: \n");
+	fgets(busca_aluno.nome, 50, stdin);
+	while (lista_aluguel -> prox_ALUGUEL != NULL) {
+		if (strcmp(busca_aluno, lista_aluguel->aluno.nome) == 0) {
+			if (strcmp(busca_livro, lista_aluguel->livro.nome) == 0) {
+				if (antecessor == NULL) {
+					lista_aluguel = atual -> prox_ALUGUEL;
+				}
+				else {
+					antecessor = atual -> prox_ALUGUEL;
+				}
+			}
+		}
+		else {
+			antecessor = atual;
+			atual = atual->prox_ALUGUEL;
+		}
+	}
+	printf("Nenhum aluguel foi encontrado!\n");
 }
 
 void busca_aluguel(ALUGUEL *lista_aluguel) {
@@ -189,7 +219,6 @@ void cadastro_aluno(ALUNO *lista_aluno) {
 	printf ("Digite o nome do aluno: ");
 	setbuf(stdin, NULL);
 	fgets(lista_aluno->nome, 50, stdin);
-	lista_aluno->nome = (char*)malloc((lista_aluno->nome) * sizeof(char));
 	printf ("Digite o turno do aluno (M, V ou I): ");
 	setbuf(stdin, NULL);
 	scanf ("%c", &lista_aluno->turno);
@@ -198,7 +227,7 @@ void cadastro_aluno(ALUNO *lista_aluno) {
 	scanf ("%d", &lista_aluno->idade);
 }
 
-void exlusao_aluno(ALUNO *lista_aluno) {
+void exclusao_aluno(ALUNO *lista_aluno) {
 
 }
 
@@ -216,19 +245,21 @@ void impressao_aluno(ALUNO *lista_aluno) {
 
 /////Funções da entidade livro/////
 void cadastro_livro(LIVRO *lista_livro) {
+	while (lista_livro -> prox_LIVRO != NULL) {
+		lista_livro = lista_livro -> prox_LIVRO;
+	}
 	printf ("Digite o nome do livro: ");
 	setbuf(stdin, NULL);
-	gets(livro.nome);
-	livro.nome = (char*)malloc((livro.nome) * sizeof(char));
+	fgets(lista_livro->nome, 50, stdin);
 	printf ("Digite o nome do autor: ");
 	setbuf(stdin, NULL);
-	gets(livro.autor);
+	fgets(lista_livro->autor, 50, stdin);
 	printf ("Digite o numero da edicao: ");
 	setbuf(stdin, NULL);
-	scanf ("%d", &livro_edicao);
+	scanf ("%d", &lista_livro->edicao);
 }
 
-void exlusao_livro(LIVRO *lista_livro) {
+void exclusao_livro(LIVRO *lista_livro) {
 
 }
 
