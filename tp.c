@@ -1,14 +1,5 @@
 #include "header.h"	 //Trabalho de AEDS I feito por Yanne Fernandes Cruz.
 
-void inic_listas(ALUGUEL* lista_aluguel, ALUNO* lista_aluno, LIVRO* lista_livro) {
-	lista_aluguel = malloc(sizeof(ALUGUEL));
-	lista_aluno = malloc(sizeof(ALUNO));
-	lista_livro = malloc(sizeof(LIVRO));
-	lista_aluguel->prox_ALUGUEL;
-	lista_aluno->prox_ALUNO;
-	lista_livro->prox_LIVRO;
-}
-
 void menu(ALUGUEL* lista_aluguel, ALUNO* lista_aluno, LIVRO* lista_livro) {
 	int op_menu = 0;
 	while (op_menu != 4) {	//Fica em looping no menu enquanto o usuário não digitar 4
@@ -82,6 +73,7 @@ void menu_aluno(ALUNO* lista_aluno) {
 		printf("Selecione o que deseja fazer: ");
 		setbuf(stdin, NULL);
 		scanf("%d", &op_submenu);
+		setbuf(stdin, NULL);
 		if (op_submenu == 1) {
 			cadastro_aluno(lista_aluno);
 			op_submenu = 0;
@@ -194,18 +186,25 @@ void impressao_aluguel(ALUGUEL* lista_aluguel) {
 
 /////Funções da entidade aluno/////
 void cadastro_aluno(ALUNO* lista_aluno) {
-	while (lista_aluno->prox_ALUNO != NULL) {
-		lista_aluno = lista_aluno->prox_ALUNO;
+	ALUNO* aux_lista = lista_aluno;
+
+	while (aux_lista->prox_ALUNO != NULL) {
+		aux_lista = aux_lista->prox_ALUNO;
 	}
+
 	printf("Digite o nome do aluno: ");
 	setbuf(stdin, NULL);
-	fgets(lista_aluno->nome, 50, stdin);
+	fgets(aux_lista->nome, 50, stdin);
 	printf("Digite o turno do aluno (M, V ou I): ");
 	setbuf(stdin, NULL);
-	scanf("%c", &lista_aluno->turno);
+	scanf("%c", &aux_lista->turno);
 	printf("Digite a idade do aluno: ");
 	setbuf(stdin, NULL);
-	scanf("%d", &lista_aluno->idade);
+	scanf("%d", &aux_lista->idade);
+	setbuf(stdin, NULL);
+	aux_lista->prox_ALUNO = malloc(sizeof(ALUNO));
+	aux_lista = aux_lista->prox_ALUNO;
+	aux_lista->prox_ALUNO = NULL;
 }
 
 void exclusao_aluno(ALUNO* lista_aluno) {

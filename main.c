@@ -3,9 +3,8 @@
 #include "header.h"
 
 void main() {
-	ALUGUEL* lista_aluguel;
-	ALUNO* lista_aluno;
-	LIVRO* lista_livro;
-	inic_listas(lista_aluguel, lista_aluno, lista_livro);
+	ALUGUEL* lista_aluguel = malloc(sizeof(ALUGUEL));
+	ALUNO* lista_aluno = malloc(sizeof(ALUNO));
+	LIVRO* lista_livro = malloc(sizeof(LIVRO));
 	menu(lista_aluguel, lista_aluno, lista_livro);
 }

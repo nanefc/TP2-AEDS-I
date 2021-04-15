@@ -31,7 +31,6 @@ typedef struct ALUGUEL {
 	struct ALUGUEL* prox_ALUGUEL;
 } ALUGUEL;
 
-void inic_listas(ALUGUEL* lista_aluguel, ALUNO* lista_aluno, LIVRO* lista_livro);
 void menu(ALUGUEL* lista_aluguel, ALUNO* lista_aluno, LIVRO* lista_livro);
 void menu_aluguel(ALUGUEL* lista_aluguel);
 void menu_aluno(ALUNO* lista_aluno);
