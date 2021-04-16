@@ -150,10 +150,6 @@ void cadastro_aluguel(ALUGUEL* lista_aluguel) {
 	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
 	lista_aluguel = lista_aluguel->prox_ALUGUEL;
 	lista_aluguel->prox_ALUGUEL = NULL;
-
-	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
-	lista_aluguel = lista_aluguel->prox_ALUGUEL;
-	lista_aluguel->prox_ALUGUEL = NULL;
 }
 
 void exclusao_aluguel(ALUGUEL* lista_aluguel) {
@@ -172,10 +168,9 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 				}
 				printf("Aluguel excluído com sucesso!\n");
 			}
-		} else {
-			antecessor = atual;
-			atual = atual->prox_ALUGUEL;
 		}
+		antecessor = atual;
+		atual = atual->prox_ALUGUEL;
 	}
 	printf("Nenhum aluguel foi encontrado!\n");
 }
