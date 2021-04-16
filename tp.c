@@ -353,13 +353,14 @@ int buscar_livro(LIVRO* lista_livro) {
 		strcpy(nome1, aux->nome);
 		strcpy(nome2, aux->autor);
 		printf("Yanne1");
-		if (strcmp(nome1, busca_livro.nome) == 0) {
+		if (strcmp(aux->nome, busca_livro.nome) == 0) {
 			printf("Yanne2");
-			if (strcmp(nome2, busca_livro.autor) == 0) {
+			if (strcmp(aux->autor, busca_livro.autor) == 0) {
 				printf("Yanne3");
 				if (aux->edicao == busca_livro.edicao) {
 					printf("Yanne4");
 					printf("O livro %s foi encontrado!\n", busca_livro.nome);
+					return 1;
 				}
 			}
 		}
