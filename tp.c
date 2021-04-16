@@ -150,22 +150,25 @@ void cadastro_aluguel(ALUGUEL* lista_aluguel) {
 }
 
 void exclusao_aluguel(ALUGUEL* lista_aluguel) {
-	LIVRO busca_livro;
-	ALUNO busca_aluno;
-	DATA busca_data;
+	ALUGUEL busca_aluguel;
 	ALUGUEL *atual = lista_aluguel, *antecessor = NULL;
-	printf("Digite o nome do livro: \n");
-	fgets(busca_livro.nome, 50, stdin);
-	printf("Digite o nome do aluno: \n");
-	fgets(busca_aluno.nome, 50, stdin);
+	printf("Digite o nome do livro: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.livro.nome, 50, stdin);
+	printf("Digite o nome do aluno: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.aluno.nome, 50, stdin);
 	while (lista_aluguel->prox_ALUGUEL != NULL) {
-		if (strcmp(busca_aluno.nome, lista_aluguel->aluno.nome) == 0) {
-			if (strcmp(busca_livro.nome, lista_aluguel->livro.nome) == 0) {
+		printf("%s", lista_aluguel->aluno.nome);
+		printf("%s", lista_aluguel->livro.nome);
+		if (strcmp(busca_aluguel.aluno.nome, lista_aluguel->aluno.nome) == 0) {
+			if (strcmp(busca_aluguel.livro.nome, lista_aluguel->livro.nome) == 0) {
 				if (antecessor == NULL) {
 					lista_aluguel = atual->prox_ALUGUEL;
 				} else {
 					antecessor = atual->prox_ALUGUEL;
 				}
+				printf("Aluguel excluído com sucesso!\n");
 			}
 		} else {
 			antecessor = atual;
@@ -176,12 +179,39 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 }
 
 void busca_aluguel(ALUGUEL* lista_aluguel) {
+	char nome1[50], nome2[50];
+	ALUGUEL *aux = lista_aluguel, busca_aluguel;
+	printf("Digite o nome do livro: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.livro.nome, 50, stdin);
+	printf("Digite o nome do aluno: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.aluno.nome, 50, stdin);
+	while (aux != NULL) {
+		strcpy(nome1, aux->aluno.nome);
+		strcpy(nome2, aux->livro.nome);
+		printf("Yanne1");
+		if (strcmp(nome1, busca_aluguel.aluno.nome) == 0) {
+			printf("Yanne2");
+			if (strcmp(nome2, busca_aluguel.livro.nome) == 0) {
+				printf("Yanne3");
+				printf("O aluguel do livro %s pelo aluno %s foi encontrado!\n", busca_aluguel.livro.nome, busca_aluguel.aluno.nome);
+				break;
+			}
+		}
+		else {
+			printf("Yanne4");
+			aux = aux->prox_ALUGUEL;
+		}
+	}
+	printf("Nenhum resultado foi encontrado!\n");
 }
 
 void quantidade_aluguel(ALUGUEL* lista_aluguel) {
 }
 
 void impressao_aluguel(ALUGUEL* lista_aluguel) {
+	//while (lista_aluguel->prox_ALUGUEL != NULL)
 }
 
 /////Funções da entidade aluno/////
