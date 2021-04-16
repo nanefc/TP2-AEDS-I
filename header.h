@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 typedef struct DATA {
 	int dia;
 	int mes;
@@ -36,18 +37,18 @@ void menu_aluguel(ALUGUEL* lista_aluguel);
 void menu_aluno(ALUNO* lista_aluno);
 void menu_livro(LIVRO* lista_livro);
 void cadastro_aluguel(ALUGUEL* lista_aluguel);
+int buscar_aluguel(ALUGUEL* lista_aluguel);
 void exclusao_aluguel(ALUGUEL* lista_aluguel);
-void busca_aluguel(ALUGUEL* lista_aluguel);
 void quantidade_aluguel(ALUGUEL* lista_aluguel);
 void impressao_aluguel(ALUGUEL* lista_aluguel);
 void cadastro_aluno(ALUNO* lista_aluno);
+int buscar_aluno(ALUNO* lista_aluno);
 void exclusao_aluno(ALUNO* lista_aluno);
-void busca_aluno(ALUNO* lista_aluno);
 void quantidade_aluno(ALUNO* lista_aluno);
 void impressao_aluno(ALUNO* lista_aluno);
 void cadastro_livro(LIVRO* lista_livro);
+int buscar_livro(LIVRO* lista_livro);
 void exclusao_livro(LIVRO* lista_livro);
-void busca_livro(LIVRO* lista_livro);
 void quantidade_livro(LIVRO* lista_livro);
 void impressao_livro(LIVRO* lista_livro);
 

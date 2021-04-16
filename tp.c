@@ -150,37 +150,9 @@ void cadastro_aluguel(ALUGUEL* lista_aluguel) {
 	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
 	lista_aluguel = lista_aluguel->prox_ALUGUEL;
 	lista_aluguel->prox_ALUGUEL = NULL;
-
-	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
-	lista_aluguel = lista_aluguel->prox_ALUGUEL;
-	lista_aluguel->prox_ALUGUEL = NULL;
 }
 
-void exclusao_aluguel(ALUGUEL* lista_aluguel) {
-	ALUGUEL busca_aluguel;
-	ALUGUEL *atual = lista_aluguel, *antecessor = NULL;
-	printf("Digite o nome do livro: ");
-	setbuf(stdin, NULL);
-	fgets(busca_aluguel.livro.nome, 50, stdin);
-	printf("Digite o nome do aluno: ");
-	setbuf(stdin, NULL);
-	fgets(busca_aluguel.aluno.nome, 50, stdin);
-	while (lista_aluguel->prox_ALUGUEL != NULL) {
-		if (strcmp(busca_aluguel.aluno.nome, lista_aluguel->aluno.nome) == 0) {
-			if (strcmp(busca_aluguel.livro.nome, lista_aluguel->livro.nome) == 0) {
-					antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
-				}
-				printf("Aluguel excluído com sucesso!\n");
-			}
-		} else {
-			antecessor = atual;
-			atual = atual->prox_ALUGUEL;
-		}
-	}
-	printf("Nenhum aluguel foi encontrado!\n");
-}
-
-void busca_aluguel(ALUGUEL* lista_aluguel) {
+int buscar_aluguel(ALUGUEL* lista_aluguel) {
 	char nome1[50], nome2[50];
 	ALUGUEL *aux = lista_aluguel, busca_aluguel;
 	printf("Digite o nome do livro: ");
@@ -198,12 +170,11 @@ void busca_aluguel(ALUGUEL* lista_aluguel) {
 			if (strcmp(nome2, busca_aluguel.livro.nome) == 0) {
 				printf("Yanne3");
 				printf("O aluguel do livro %s pelo aluno %s foi encontrado!\n", busca_aluguel.livro.nome, busca_aluguel.aluno.nome);
-				break;
+				return 1;
 			}
-		} else {
-			printf("Yanne4");
-			aux = aux->prox_ALUGUEL;
 		}
+		printf("Yanne4");
+		aux = aux->prox_ALUGUEL;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
 }
@@ -219,9 +190,7 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 	fgets(busca_aluguel.aluno.nome, 50, stdin);
 	while (lista_aluguel != NULL) {
 		printf("Yanne1");
-		if (strcmp(busca_aluguel.aluno.nome, lista_aluguel->aluno.nome) == 0) {
-			printf("Yanne2");
-			if (strcmp(busca_aluguel.livro.nome, lista_aluguel->livro.nome) == 0) {
+		if (buscar_aluguel(lista_aluguel) == 1) {
 				antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
 				return;
 			}
@@ -274,10 +243,7 @@ void cadastro_aluno(ALUNO* lista_aluno) {
 	lista_aluno->prox_ALUNO = NULL;
 }
 
-void exclusao_aluno(ALUNO* lista_aluno) {
-}
-
-void busca_aluno(ALUNO* lista_aluno) {
+int buscar_aluno(ALUNO* lista_aluno) {
 	char nome1[50], nome2[50];
 	ALUNO *aux = lista_aluno, busca_aluno;
 	printf("Digite o nome do aluno: ");
@@ -295,15 +261,16 @@ void busca_aluno(ALUNO* lista_aluno) {
 			if (lista_aluno->idade == busca_aluno.idade) {
 				printf("Yanne3");
 				printf("O aluno %s foi encontrado!\n", busca_aluno.nome);
-				break;
+				return 1;
 			}
 		}
-		else {
-			printf("Yanne4");
-			aux = aux->prox_ALUNO;
-		}
+		printf("Yanne4");
+		aux = aux->prox_ALUNO;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
+}
+
+void exclusao_aluno(ALUNO* lista_aluno) {
 }
 
 void quantidade_aluno(ALUNO* lista_aluno) {
@@ -319,7 +286,7 @@ void quantidade_aluno(ALUNO* lista_aluno) {
 void impressao_aluno(ALUNO* lista_aluno) {
 	ALUNO *aux = lista_aluno;
 	while (aux->prox_ALUNO != NULL) {
-		if (aux->turno == 'm' || aux->turno == 'M') {
+		if (aux->turno == 'M' || aux->turno == 'm') {
 			printf("Nome:%sIdade: %d\nTurno: Matutino\n", aux->nome, aux->idade);
 		}
 		else if (aux->turno == 'V' || aux->turno == 'v') {
@@ -351,10 +318,7 @@ void cadastro_livro(LIVRO* lista_livro) {
 	lista_livro->prox_LIVRO = NULL;
 }
 
-void exclusao_livro(LIVRO* lista_livro) {
-}
-
-void busca_livro(LIVRO* lista_livro) {
+int buscar_livro(LIVRO* lista_livro) {
 	char nome1[50], nome2[50];
 	LIVRO *aux = lista_livro, busca_livro;
 	printf("Digite o nome do livro: ");
@@ -376,16 +340,17 @@ void busca_livro(LIVRO* lista_livro) {
 				if (aux->edicao == busca_livro.edicao) {
 					printf("Yanne4");
 					printf("O livro %s foi encontrado!\n", busca_livro.nome);
-					break;
+					return 1;
 				}
 			}
 		}
-		else {
-			printf("Yanne5");
-			aux = aux->prox_LIVRO;
-		}
+		printf("Yanne5");
+		aux = aux->prox_LIVRO;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
+}
+
+void exclusao_livro(LIVRO* lista_livro) {
 }
 
 void quantidade_livro(LIVRO* lista_livro) {
