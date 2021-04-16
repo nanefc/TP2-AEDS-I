@@ -150,6 +150,34 @@ void cadastro_aluguel(ALUGUEL* lista_aluguel) {
 	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
 	lista_aluguel = lista_aluguel->prox_ALUGUEL;
 	lista_aluguel->prox_ALUGUEL = NULL;
+
+	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
+	lista_aluguel = lista_aluguel->prox_ALUGUEL;
+	lista_aluguel->prox_ALUGUEL = NULL;
+}
+
+void exclusao_aluguel(ALUGUEL* lista_aluguel) {
+	ALUGUEL busca_aluguel;
+	ALUGUEL *atual = lista_aluguel, *antecessor = NULL;
+	printf("Digite o nome do livro: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.livro.nome, 50, stdin);
+	printf("Digite o nome do aluno: ");
+	setbuf(stdin, NULL);
+	fgets(busca_aluguel.aluno.nome, 50, stdin);
+	while (lista_aluguel->prox_ALUGUEL != NULL) {
+		if (strcmp(busca_aluguel.aluno.nome, lista_aluguel->aluno.nome) == 0) {
+			if (strcmp(busca_aluguel.livro.nome, lista_aluguel->livro.nome) == 0) {
+					antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
+				}
+				printf("Aluguel excluído com sucesso!\n");
+			}
+		} else {
+			antecessor = atual;
+			atual = atual->prox_ALUGUEL;
+		}
+	}
+	printf("Nenhum aluguel foi encontrado!\n");
 }
 
 void busca_aluguel(ALUGUEL* lista_aluguel) {
@@ -172,8 +200,7 @@ void busca_aluguel(ALUGUEL* lista_aluguel) {
 				printf("O aluguel do livro %s pelo aluno %s foi encontrado!\n", busca_aluguel.livro.nome, busca_aluguel.aluno.nome);
 				break;
 			}
-		}
-		else {
+		} else {
 			printf("Yanne4");
 			aux = aux->prox_ALUGUEL;
 		}
