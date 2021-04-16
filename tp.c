@@ -168,15 +168,15 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 	while (lista_aluguel->prox_ALUGUEL != NULL) {
 		if (strcmp(busca_aluguel.aluno.nome, lista_aluguel->aluno.nome) == 0) {
 			if (strcmp(busca_aluguel.livro.nome, lista_aluguel->livro.nome) == 0) {
-					antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
-				}
+				antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
 				printf("Aluguel excluído com sucesso!\n");
 			}
-		} else {
-			antecessor = atual;
-			atual = atual->prox_ALUGUEL;
 		}
+
+		antecessor = atual;
+		atual = atual->prox_ALUGUEL;
 	}
+
 	printf("Nenhum aluguel foi encontrado!\n");
 }
 
@@ -198,12 +198,11 @@ void busca_aluguel(ALUGUEL* lista_aluguel) {
 			if (strcmp(nome2, busca_aluguel.livro.nome) == 0) {
 				printf("Yanne3");
 				printf("O aluguel do livro %s pelo aluno %s foi encontrado!\n", busca_aluguel.livro.nome, busca_aluguel.aluno.nome);
-				break;
+				return;
 			}
-		} else {
-			printf("Yanne4");
-			aux = aux->prox_ALUGUEL;
 		}
+		printf("Yanne4");
+		aux = aux->prox_ALUGUEL;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
 }
@@ -225,7 +224,7 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 				antecessor->prox_ALUGUEL = atual->prox_ALUGUEL;
 				return;
 			}
-		} 
+		}
 		printf("Yanne3");
 		antecessor = atual;
 		atual = atual->prox_ALUGUEL;
@@ -234,7 +233,7 @@ void exclusao_aluguel(ALUGUEL* lista_aluguel) {
 }
 
 void quantidade_aluguel(ALUGUEL* lista_aluguel) {
-	ALUGUEL *aux = lista_aluguel;
+	ALUGUEL* aux = lista_aluguel;
 	int i = 0;
 	while (aux->prox_ALUGUEL != NULL) {
 		i++;
@@ -244,7 +243,7 @@ void quantidade_aluguel(ALUGUEL* lista_aluguel) {
 }
 
 void impressao_aluguel(ALUGUEL* lista_aluguel) {
-	ALUGUEL *aux = lista_aluguel;
+	ALUGUEL* aux = lista_aluguel;
 	while (aux->prox_ALUGUEL != NULL) {
 		printf("Nome do livro:%sNome do aluno: %sData: %d/%d\n\n", aux->livro.nome, aux->aluno.nome, aux->data.dia, aux->data.mes);
 		aux = aux->prox_ALUGUEL;
@@ -298,16 +297,14 @@ void busca_aluno(ALUNO* lista_aluno) {
 				break;
 			}
 		}
-		else {
-			printf("Yanne4");
-			aux = aux->prox_ALUNO;
-		}
+		printf("Yanne4");
+		aux = aux->prox_ALUNO;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
 }
 
 void quantidade_aluno(ALUNO* lista_aluno) {
-	ALUNO *aux = lista_aluno;
+	ALUNO* aux = lista_aluno;
 	int i = 0;
 	while (aux->prox_ALUNO != NULL) {
 		i++;
@@ -317,15 +314,13 @@ void quantidade_aluno(ALUNO* lista_aluno) {
 }
 
 void impressao_aluno(ALUNO* lista_aluno) {
-	ALUNO *aux = lista_aluno;
+	ALUNO* aux = lista_aluno;
 	while (aux->prox_ALUNO != NULL) {
 		if (aux->turno == 'm' || aux->turno == 'M') {
 			printf("Nome:%sIdade: %d\nTurno: Matutino\n", aux->nome, aux->idade);
-		}
-		else if (aux->turno == 'V' || aux->turno == 'v') {
+		} else if (aux->turno == 'V' || aux->turno == 'v') {
 			printf("Nome:%sIdade: %d\nTurno: Vespertino\n", aux->nome, aux->idade);
-		}
-		else if (aux->turno == 'I' || aux->turno == 'i') {
+		} else if (aux->turno == 'I' || aux->turno == 'i') {
 			printf("Nome:%sIdade: %d\nTurno: Integral\n", aux->nome, aux->idade);
 		}
 		aux = aux->prox_ALUNO;
@@ -376,20 +371,18 @@ void busca_livro(LIVRO* lista_livro) {
 				if (aux->edicao == busca_livro.edicao) {
 					printf("Yanne4");
 					printf("O livro %s foi encontrado!\n", busca_livro.nome);
-					break;
+					return;
 				}
 			}
 		}
-		else {
-			printf("Yanne5");
-			aux = aux->prox_LIVRO;
-		}
+		printf("Yanne5");
+		aux = aux->prox_LIVRO;
 	}
 	printf("Nenhum resultado foi encontrado!\n");
 }
 
 void quantidade_livro(LIVRO* lista_livro) {
-	LIVRO *aux = lista_livro;
+	LIVRO* aux = lista_livro;
 	int i = 0;
 	while (aux->prox_LIVRO != NULL) {
 		i++;
@@ -399,7 +392,7 @@ void quantidade_livro(LIVRO* lista_livro) {
 }
 
 void impressao_livro(LIVRO* lista_livro) {
-	LIVRO *aux = lista_livro;
+	LIVRO* aux = lista_livro;
 	while (aux->prox_LIVRO != NULL) {
 		printf("Nome:%sAutor: %sEdicao: %d\n\n", aux->nome, aux->autor, aux->edicao);
 		aux = aux->prox_LIVRO;
