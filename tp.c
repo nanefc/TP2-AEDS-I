@@ -147,6 +147,10 @@ void cadastro_aluguel(ALUGUEL* lista_aluguel) {
 	printf("Digite a data do aluguel (dd/mm): ");
 	setbuf(stdin, NULL);
 	scanf("%d/%d", &lista_aluguel->data.dia, &lista_aluguel->data.mes);
+
+	lista_aluguel->prox_ALUGUEL = malloc(sizeof(ALUGUEL));
+	lista_aluguel = lista_aluguel->prox_ALUGUEL;
+	lista_aluguel->prox_ALUGUEL = NULL;
 }
 
 void exclusao_aluguel(ALUGUEL* lista_aluguel) {
@@ -198,8 +202,7 @@ void busca_aluguel(ALUGUEL* lista_aluguel) {
 				printf("O aluguel do livro %s pelo aluno %s foi encontrado!\n", busca_aluguel.livro.nome, busca_aluguel.aluno.nome);
 				break;
 			}
-		}
-		else {
+		} else {
 			printf("Yanne4");
 			aux = aux->prox_ALUGUEL;
 		}
@@ -263,6 +266,9 @@ void cadastro_livro(LIVRO* lista_livro) {
 	printf("Digite o numero da edicao: ");
 	setbuf(stdin, NULL);
 	scanf("%d", &lista_livro->edicao);
+	lista_livro->prox_LIVRO = malloc(sizeof(LIVRO));
+	lista_livro = lista_livro->prox_LIVRO;
+	lista_livro->prox_LIVRO = NULL;
 }
 
 void exclusao_livro(LIVRO* lista_livro) {
